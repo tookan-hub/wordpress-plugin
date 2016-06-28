@@ -1,12 +1,10 @@
-<?php 
+<?php
  /*
 Plugin Name: tookan_task_api
 */
 ?>
 <style type="text/css">
-  .wrap label{width: 6%;float: left;}
-
-
+  .wrap_tookan label{width: 6%;float: left;}
 </style>
 <?php
 if ( !session_id() ) {
@@ -27,9 +25,9 @@ $get_user_id = $_POST['get_user_id'];
   $sql1 = "INSERT INTO $table_name (access_token, user_id) VALUES ('".$access_token."', '".$get_user_id."')";
 //  echo $sql1 ;
 
-               if($wpdb->query($sql1)) 
+               if($wpdb->query($sql1))
                {
-              
+
                //echo "success";
                }
 }
@@ -52,7 +50,7 @@ global $wpdb;
       id int(11) NOT NULL AUTO_INCREMENT,
       access_token varchar(255),
      user_id varchar(255),
-      UNIQUE KEY id (id) 
+      UNIQUE KEY id (id)
     );";
    // echo $sql;
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -65,7 +63,7 @@ global $wpdb;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 <script type="text/javascript">
-	
+
 $(document).ready(function() {
     $("input#start_task").click(function(event) {
 
@@ -85,13 +83,13 @@ var user_id = $('input#get_user_id').val();
       if (data['status'] == 200){
      $('.success_msg').css('display','block');
       $('.final_succes,.error_msg_user,.error_msg').css('display','none');
-   
+
 
      if(data.data['user_id'] == user_id) {
 
      $('.final_succes').css('display','block');
      $('.success_msg,.error_msg_user,.error_msg').css('display','none');
-        
+
 
      }
      else {
@@ -120,16 +118,16 @@ var user_id = $('input#get_user_id').val();
 <div class="error_msg_user" style="display: none; font-size: 14px;transition: 1s all ease;color:#FF0000;">Please enter user id.</div>
 <div class="success_msg" style="display: none;color: #008000;font-size: 14px;transition: 1s all ease;">Logged in successfully.</div>
 <div class="final_succes" style="display: none;font-size: 14px;transition: 1s all ease;color: #008000;">Saved Successfully</div>
- 
-<div class="wrap">
 
-     
+<div class="wrap_tookan">
+
+
     <form name="oscimp_form" method="post" action="">
         <input type="hidden" name="oscimp_hidden" value="Y">
         <p><label><?php _e("Access Tookan : " ); ?></label><input type="text" name="get_access_tookan" value="<?php echo $dbhost; ?>" size="20" id="get_access" placeholder="Access Tookan"></p>
         <p><label><?php _e("User Id: " ); ?></label><input type="text" name="get_user_id" value="<?php echo $dbname; ?>" size="20" id="get_user_id" placeholder="User id"></p>
-      
-     
+
+
         <p class="submit">
         <input type="submit" name="start_task" value="<?php _e('Get started') ?>" id="start_task"/>
         </p>
@@ -138,7 +136,7 @@ var user_id = $('input#get_user_id').val();
 
 
 	<?php
- //echo $_SESSION['access_token']; 
+ //echo $_SESSION['access_token'];
 
 }
 
