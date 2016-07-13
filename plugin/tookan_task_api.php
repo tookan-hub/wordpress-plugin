@@ -3,9 +3,6 @@
 Plugin Name: tookan_task_api
 */
 ?>
-<style type="text/css">
-  .wrap_tookan label{width: 6%;float: left;}
-</style>
 <?php
 if ( !session_id() ) {
 	session_start();
@@ -67,7 +64,6 @@ global $wpdb;
 $(document).ready(function() {
     $("input#start_task").click(function(event) {
 
-      //alert("hiii");
 
 var access_token = $('input#get_access').val();
 var user_id = $('input#get_user_id').val();
@@ -80,30 +76,39 @@ var user_id = $('input#get_user_id').val();
 		dataType: 'JSON',
 		success: function(data) {
 		console.log(data);
-      if (data['status'] == 200){
+     if (data['status'] == 200){
+      console.log('2000');
      $('.success_msg').css('display','block');
       $('.final_succes,.error_msg_user,.error_msg').css('display','none');
-
+   
 
      if(data.data['user_id'] == user_id) {
 
      $('.final_succes').css('display','block');
      $('.success_msg,.error_msg_user,.error_msg').css('display','none');
-
-
+     setTimeout(function(){
+              $('#php_submit').click();
+        }, 1000);
+    // settimeout$('#php_submit').click();
+     // return true;
      }
+
      else {
       $('.error_msg_user').css('display','block');
       $('.success_msg,.final_succes,.error_msg').css('display','none');
-        return false;
      }
+     return false;
     }
     else {
        $('.error_msg').css('display','block');
        $('.success_msg,.final_succes,.error_msg_user').css('display','none');
-             return false;
+       return false;
     }
 		},
+    error:function(data){
+      console.log(data);
+       return false;
+    }
 	});
 
     });
@@ -124,22 +129,23 @@ var user_id = $('input#get_user_id').val();
 
     <form name="oscimp_form" method="post" action="">
         <input type="hidden" name="oscimp_hidden" value="Y">
-        <p><label><?php _e("Access Tookan : " ); ?></label><input type="text" name="get_access_tookan" value="<?php echo $dbhost; ?>" size="20" id="get_access" placeholder="Access Tookan"></p>
-        <p><label><?php _e("User Id: " ); ?></label><input type="text" name="get_user_id" value="<?php echo $dbname; ?>" size="20" id="get_user_id" placeholder="User id"></p>
+        <p><label style="width: 6%;float: left;"><?php _e("Access Tookan : " ); ?></label><input type="text" name="get_access_tookan" value="<?php echo $dbhost; ?>" size="20" id="get_access" placeholder="Access Tookan"></p>
+        <p><label style="width: 6%;float: left;"><?php _e("User Id: " ); ?></label><input type="text" name="get_user_id" value="<?php echo $dbname; ?>" size="20" id="get_user_id" placeholder="User id"></p>
 
 
-        <p class="submit">
-        <input type="submit" name="start_task" value="<?php _e('Get started') ?>" id="start_task"/>
+        <p class="submit" style="margin-top: 0px !important;">
+        <input type="button" name="start_task" value="<?php _e('Get started') ?>" id="start_task" style=" padding: 6px 20px !important;font-size: 15px; background: #191e23;border: 0;
+    color: #fff; border: 1px solid #ccc;outline: none;text-transform: uppercase;"/>
+      <input type="submit" name="start_task" value="<?php _e('Get started') ?>" id="php_submit" style="display: none;" />
+
+
         </p>
     </form>
 </div>
 
 
 	<?php
- //echo $_SESSION['access_token'];
 
 }
-
-
 
 ?>
