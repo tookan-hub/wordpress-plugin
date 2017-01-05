@@ -1,3 +1,6 @@
+Note - this repo is not being maintained anymore
+
+
 # wordpress-plugin
 
 Wordpress Sample Code for Creating a Task and Get Task Details
